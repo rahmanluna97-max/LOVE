@@ -1,0 +1,664 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUMO ♡ DEEP</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse at 50% 45%, #505057 0%, #303034 45%, #1b1b1e 100%);
+    color: #efd28c;
+    font-family: Georgia, serif;
+    overflow-x: hidden;
+}
+
+/* PASSWORD SCREEN */
+
+#lock {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background:
+      radial-gradient(circle, #505057, #29292d 65%, #19191c);
+}
+
+.lock-box {
+    width: 100%;
+    max-width: 370px;
+    padding: 45px 25px;
+    text-align: center;
+    border: 1px solid #d6b66b;
+    border-radius: 25px;
+    background: #29292cbb;
+    box-shadow: 0 0 45px #d5ae5533;
+    animation: entrance 2s ease;
+}
+
+.lock-box h1 {
+    font-size: 32px;
+    letter-spacing: 5px;
+    color: #f3d68f;
+    text-shadow: 0 0 15px #d9b45d;
+}
+
+.lock-box p {
+    margin: 22px 0;
+    color: #e2d8c4;
+    font-style: italic;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 30px;
+    border: 1px solid #d9b968;
+    background: #202023;
+    color: #fff;
+    text-align: center;
+    outline: none;
+    font-size: 16px;
+    letter-spacing: 4px;
+}
+
+button {
+    padding: 13px 38px;
+    margin-top: 22px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(90deg,#a77e35,#f4d68d,#b28a42);
+    color: #252323;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 20px #d7b45c55;
+}
+
+button:active {
+    transform: scale(.95);
+}
+
+#error {
+    margin-top: 15px;
+    color: #ffaaaa;
+}
+
+/* MAIN WEBSITE */
+
+#main {
+    display: none;
+    min-height: 100vh;
+    position: relative;
+    text-align: center;
+    padding: 25px 15px 45px;
+    overflow: hidden;
+}
+
+.top-title {
+    margin-top: 25px;
+    font-size: clamp(29px, 8vw, 45px);
+    letter-spacing: 5px;
+    opacity: 0;
+    animation: titleAppear 2s ease 3.4s forwards,
+               goldenGlow 3s ease-in-out 5s infinite alternate;
+}
+
+.heart {
+    color: #ffe5a4;
+}
+
+.subtitle {
+    margin-top: 17px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: #ded5c2;
+    opacity: 0;
+    animation: fadeIn 2s ease 3.8s forwards;
+}
+
+/* LOTUS FLOWER */
+
+.lotus {
+    position: relative;
+    width: 280px;
+    height: 320px;
+    margin: 20px auto 0;
+    transform-origin: center;
+    animation: flowerFloat 5s ease-in-out 4s infinite;
+}
+
+/* PETALS */
+
+.petal {
+    position: absolute;
+    width: 76px;
+    height: 130px;
+    left: 102px;
+    top: 35px;
+
+    border-radius: 85% 85% 35% 35%;
+
+    transform-origin: 50% 100%;
+    opacity: 0;
+
+    background:
+      linear-gradient(
+        90deg,
+        #a57b37 0%,
+        #e4bd6e 24%,
+        #fff0bd 50%,
+        #e4bd6e 76%,
+        #a57b37 100%
+      );
+
+    border: 1px solid #f4d58b;
+
+    box-shadow:
+      inset 0 0 12px #fff3c0,
+      0 0 18px #d8b35b66;
+
+    animation:
+      petalBloom 1.8s cubic-bezier(.2,.8,.3,1) forwards,
+      petalShine 3s ease-in-out 4s infinite alternate;
+}
+
+/* PETAL OPENING ORDER */
+
+.petal:nth-child(1) {
+    --angle: -72deg;
+    --sx: .80;
+    animation-delay: .3s,4s;
+}
+
+.petal:nth-child(2) {
+    --angle: -58deg;
+    --sx: .90;
+    animation-delay: .55s,4s;
+}
+
+.petal:nth-child(3) {
+    --angle: -43deg;
+    --sx: 1;
+    animation-delay: .8s,4s;
+}
+
+.petal:nth-child(4) {
+    --angle: -28deg;
+    --sx: 1.02;
+    animation-delay: 1.05s,4s;
+}
+
+.petal:nth-child(5) {
+    --angle: -14deg;
+    --sx: 1.08;
+    animation-delay: 1.3s,4s;
+}
+
+.petal:nth-child(6) {
+    --angle: 0deg;
+    --sx: 1.13;
+    animation-delay: 1.55s,4s;
+}
+
+.petal:nth-child(7) {
+    --angle: 14deg;
+    --sx: 1.08;
+    animation-delay: 1.8s,4s;
+}
+
+.petal:nth-child(8) {
+    --angle: 28deg;
+    --sx: 1.02;
+    animation-delay: 2.05s,4s;
+}
+
+.petal:nth-child(9) {
+    --angle: 43deg;
+    --sx: 1;
+    animation-delay: 2.3s,4s;
+}
+
+.petal:nth-child(10) {
+    --angle: 58deg;
+    --sx: .90;
+    animation-delay: 2.55s,4s;
+}
+
+.petal:nth-child(11) {
+    --angle: 72deg;
+    --sx: .80;
+    animation-delay: 2.8s,4s;
+}
+
+/* ACTUAL BLOOM */
+
+@keyframes petalBloom {
+    0% {
+        transform: rotate(0deg) scale(.04,.16);
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 1;
+    }
+
+    75% {
+        transform:
+          rotate(var(--angle))
+          scale(calc(var(--sx) * 1.08),1.08);
+    }
+
+    100% {
+        transform:
+          rotate(var(--angle))
+          scale(var(--sx),1);
+        opacity: 1;
+    }
+}
+
+/* GOLDEN SHINE */
+
+@keyframes petalShine {
+    from {
+        filter: brightness(1);
+        box-shadow: 0 0 12px #d9b55b44;
+    }
+
+    to {
+        filter: brightness(1.25);
+        box-shadow: 0 0 28px #ffe6a6aa;
+    }
+}
+
+/* FLOWER CENTER */
+
+.center {
+    position: absolute;
+    top: 145px;
+    left: 122px;
+    width: 38px;
+    height: 38px;
+    z-index: 5;
+
+    border-radius: 50%;
+
+    background:
+      radial-gradient(circle,#fff7cf,#f2ce78,#a77a2e);
+
+    box-shadow: 0 0 30px #ffdc80;
+
+    transform: scale(0);
+
+    animation: centerAppear 1s ease 3.3s forwards;
+}
+
+@keyframes centerAppear {
+    0% { transform: scale(0); }
+    70% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+/* STEM */
+
+.stem {
+    position: absolute;
+    top: 170px;
+    left: 139px;
+    height: 125px;
+    width: 5px;
+
+    background: linear-gradient(#c6a65b,#657653);
+
+    border-radius: 10px;
+    transform: scaleY(0);
+    transform-origin: top;
+
+    animation: stemGrow 2s ease 1.4s forwards;
+}
+
+@keyframes stemGrow {
+    to { transform: scaleY(1); }
+}
+
+/* LEAVES */
+
+.leaf {
+    position: absolute;
+    top: 230px;
+    width: 70px;
+    height: 32px;
+
+    background:
+      linear-gradient(45deg,#455943,#a6a66b);
+
+    border-radius: 100% 0 100% 0;
+
+    transform: scale(0);
+    transform-origin: center;
+    animation: leafOpen 1.5s ease 2.8s forwards;
+}
+
+.leaf.left {
+    left: 65px;
+    --rotation: 15deg;
+}
+
+.leaf.right {
+    right: 65px;
+    --rotation: 75deg;
+}
+
+@keyframes leafOpen {
+    0% {
+        transform: rotate(0deg) scale(0);
+    }
+
+    100% {
+        transform: rotate(var(--rotation)) scale(1);
+    }
+}
+
+/* FLOWER FLOAT */
+
+@keyframes flowerFloat {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+/* MESSAGE */
+
+.message {
+    max-width: 480px;
+    margin: -10px auto 0;
+    padding: 0 10px;
+
+    color: #e8dfcc;
+    font-size: 16px;
+    line-height: 2;
+
+    opacity: 0;
+    animation: fadeIn 2.5s ease 4s forwards;
+}
+
+.signature {
+    margin-top: 30px;
+    font-size: 21px;
+    letter-spacing: 3px;
+
+    opacity: 0;
+    animation: fadeIn 2s ease 5s forwards;
+}
+
+.footer {
+    margin-top: 20px;
+    color: #c9b78d;
+    font-size: 11px;
+    letter-spacing: 3px;
+
+    opacity: 0;
+    animation: fadeIn 2s ease 5.5s forwards;
+}
+
+/* SPARKLES */
+
+.sparkle {
+    position: absolute;
+    color: #ffe3a0;
+    pointer-events: none;
+    animation: sparkleMove 3s ease-in-out infinite;
+}
+
+.s1 { top: 15%; left: 12%; }
+.s2 { top: 22%; right: 15%; animation-delay: 1s; }
+.s3 { top: 55%; left: 9%; animation-delay: .5s; }
+.s4 { top: 62%; right: 10%; animation-delay: 1.5s; }
+.s5 { top: 40%; left: 85%; animation-delay: 2s; }
+.s6 { top: 75%; left: 25%; animation-delay: 1.2s; }
+
+@keyframes sparkleMove {
+    0%,100% {
+        opacity: .2;
+        transform: scale(.5) rotate(0deg);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.5) rotate(90deg);
+        text-shadow: 0 0 15px #ffdf90;
+    }
+}
+
+/* ANIMATION HELPERS */
+
+@keyframes titleAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes goldenGlow {
+    from { text-shadow: 0 0 5px #d1a94f; }
+    to { text-shadow: 0 0 25px #ffe3a0, 0 0 40px #b58a39; }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes entrance {
+    from {
+        opacity: 0;
+        transform: scale(.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:480px) {
+    #main {
+        padding-top: 18px;
+    }
+
+    .lotus {
+        transform: scale(.90);
+        margin-top: 5px;
+        margin-bottom: -10px;
+    }
+
+    .message {
+        font-size: 14px;
+    }
+
+    .top-title {
+        letter-spacing: 3px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD -->
+
+<div id="lock">
+
+    <div class="lock-box">
+
+        <h1>LUMO <span class="heart">♡</span> DEEP</h1>
+
+        <p>A little world made only for you...</p>
+
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter Secret Password"
+          autocomplete="off"
+        >
+
+        <br>
+
+        <button onclick="unlock()">
+            UNLOCK ♡
+        </button>
+
+        <div id="error"></div>
+
+    </div>
+
+</div>
+
+
+<!-- MAIN WEBSITE -->
+
+<div id="main">
+
+    <!-- FLOATING SPARKLES -->
+
+    <div class="sparkle s1">✦</div>
+    <div class="sparkle s2">✧</div>
+    <div class="sparkle s3">✦</div>
+    <div class="sparkle s4">✧</div>
+    <div class="sparkle s5">✦</div>
+    <div class="sparkle s6">✧</div>
+
+
+    <!-- TITLE -->
+
+    <h1 class="top-title">
+        LUMO <span class="heart">♡</span> DEEP
+    </h1>
+
+    <p class="subtitle">
+        TWO SOULS • ONE BEAUTIFUL STORY
+    </p>
+
+
+    <!-- LOTUS -->
+
+    <div class="lotus">
+
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+
+        <div class="center"></div>
+
+        <div class="stem"></div>
+
+        <div class="leaf left"></div>
+        <div class="leaf right"></div>
+
+    </div>
+
+
+    <!-- LOVE MESSAGE -->
+
+    <div class="message">
+
+        Some flowers bloom in the sunlight,<br>
+        but some beautiful things bloom in the heart. ♡
+
+        <br><br>
+
+        Just like a lotus, may our little world<br>
+        always remain beautiful and special.
+
+        <br><br>
+
+        No matter how far the stars are,<br>
+        some connections will always stay close.
+
+    </div>
+
+
+    <!-- SIGNATURE -->
+
+    <div class="signature">
+        FOREVER WITH YOU ♡
+    </div>
+
+    <div class="footer">
+        MADE WITH LOVE • LUMO
+    </div>
+
+</div>
+
+
+<script>
+
+function unlock() {
+
+    const pass =
+      document.getElementById("password").value;
+
+    if (pass === "DEEPMO") {
+
+        document.getElementById("lock").style.display = "none";
+
+        const main = document.getElementById("main");
+
+        main.style.display = "block";
+
+    } else {
+
+        document.getElementById("error").innerText =
+          "Wrong password! Try again, my love ♡";
+
+    }
+
+}
+
+document.getElementById("password")
+.addEventListener("keydown", function(e) {
+
+    if (e.key === "Enter") {
+        unlock();
+    }
+
+});
+
+</script>
+
+</body>
+</html>
